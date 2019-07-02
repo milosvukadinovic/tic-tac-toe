@@ -1,30 +1,57 @@
-.Grid
-{
-	width: 600px;
-	height: 600px;
+.grid-board {
+	width: 350px;
+	height: 350px;
 	margin: 0 auto;
-  background-color: #34495e;
-  color: #fff;
-  border: 6px solid #2c3e50;
   border-radius: 10px;
-	
 	display: grid;
 	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+	box-sizing:border-box;
 }
 
-.Pos
-{
-  border: 6px solid #2c3e50;
+.box {
+  border: 3px solid #2c3e50;
   border-radius: 2px;
-  font-family: Helvetica;
   font-weight: bold;
-  font-size: 4em;
-  display: flex;
   justify-content: center;
   align-items: center;
+	vertical-align: middle;
+	box-sizing:border-box;
+-webkit-transform: perspective(1px) translateZ(0);
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+-webkit-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-transition-property: transform;
+transition-property: transform;
+
 }
-h1{
-  font-size: 35pt;
-  font-weight: bold;
-  text-align:center;
+
+ .box:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.box:active{
+	-webkit-transform: scale(0.9);
+   transform: scale(0.9);
+}
+h1 {
+	padding: 0;
+}
+.text{
+	font-size: 2.5rem;
+	font-family: cursive;
+	text-align: center;
+	user-select: none;
+}
+.right-vertical {
+	border-right: solid 1.5px #2c3e50;
+}
+.left-vertical {
+border-left: solid 1.5px #2c3e50;
+}
+.top-horizontal {
+	border-top: solid 1.5px #2c3e50;
+}
+.bottom-horizontal {
+	border-bottom: solid 1.5px #2c3e50;
 }
