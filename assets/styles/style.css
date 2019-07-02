@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'RoadsideRegular';
+  src: url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.eot');
+  src: url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.eot?#iefix') format('embedded-opentype'),
+       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.svg#RoadsideRegular') format('svg'),
+       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.ttf') format('truetype'),
+			 url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.woff') format('woff'),
+       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+nav {
+	height: 80px;
+	margin-bottom: 24px;
+	background-color: #2c82c9;
+	color: white;
+	font-size: 3.5rem;
+	text-align: center;
+	font-family: 'RoadsideRegular';
+	user-select: none;
+}
+
 .grid-board {
 	width: 350px;
 	height: 350px;
