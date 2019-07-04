@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'RoadsideRegular';
-  src: url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.eot');
-  src: url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.eot?#iefix') format('embedded-opentype'),
-       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.svg#RoadsideRegular') format('svg'),
-       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.ttf') format('truetype'),
-			 url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.woff') format('woff'),
-       url('/home/azdren/Desktop/microverse/javascript/tic-tac-toe/assets/fonts/RoadsideRegular.woff2') format('woff2');
+  src: url('../fonts/RoadsideRegular.eot');
+  src: url('../fonts/RoadsideRegular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/RoadsideRegular.svg#RoadsideRegular') format('svg'),
+       url('../fonts/RoadsideRegular.ttf') format('truetype'),
+			 url('../fonts/RoadsideRegular.woff') format('woff'),
+       url('../fonts/RoadsideRegular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }

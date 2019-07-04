@@ -4,7 +4,7 @@ const gameBoard = ( ()=>{
 
     let board = [ [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
                   [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
-                {mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
+                [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
 
     function changeBoard(row,column,mark){
        board[row][column] = mark;
@@ -45,50 +45,48 @@ const playerFactory = (name, mark) => {
 
 })();
 
-const startGame = () => {
-    getPlayersNames();
+
+let turn=1;
+
+const startGame = (name1,name2) => {
+    
+    setPlayersNames(name1,name2);
+    // do we need this function?
+    
 
 
 };
 
+const playerMove = (x,y) => {
+    mark = turn===1 ? "X": "O" ;
+    addMark(mark,x,y);
+    checkWin(mark);
+    isFull();
+    turnCheck(turn)
+    return mark;
+};
+
+const addMark = (mark,x,y) => {
+
+    board[x][y].mark=mark;
+    board[x][y].checked=true;
+
+};
+
+const turnCheck =(turn) => {
+
+    turn = turn===1 ? 2 : 1 ;
+    return turn;
+};
 
 
-const startGame = (name1,name2) => {
-    let turn=1;
-    setPlayersNames(name1,name2);
-    // do we need this function?
-    const playerMove = (x,y) => {
-        mark = turn===1 ? "X": "O" ;
-        addMark(mark,x,y);
-        checkWin(mark);
-        isFull();
-        turnCheck(turn)
-    };
+const setPlayersNames= (name1,name2) => {
 
-    const addMark = (mark,x,y) => {
-
-        board[x][y].mark=mark;
-        board[x][y].checked=true;
-
-    };
-
-    const turnCheck =(turn) => {
-
-        turn = turn===1 ? 2 : 1 ;
-        return turn;
-    };
-
-
-    const setPlayersNames= (name1,name2) => {
-
-      let player1 = playerFactory(name1,'X');
-      let player2 = playerFactory(name2,'O');
-        players.push(player1);
-        players.push(player2);
-      return {name1,name2};
-    };
-
-
+  let player1 = playerFactory(name1,'X');
+  let player2 = playerFactory(name2,'O');
+    players.push(player1);
+    players.push(player2);
+  return {name1,name2};
 };
 
 
@@ -98,7 +96,7 @@ const startGame = (name1,name2) => {
 const resetBoard = () => {
     let board = [ [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
                   [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
-                {mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
+                [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
     return board;
             };
 
@@ -181,11 +179,12 @@ const resetBoard = () => {
 
     box.addEventListener('click',(event)=>{
       if(playersNamesAreSet()){
-        const  x = event.target.getAttribute('data-x')
-        const  y = event.target.getAttribute('data-y')
-        event.target.innerText = "X"
+        const  x = event.target.getAttribute('data-x');
+        const  y = event.target.getAttribute('data-y');
+        
         console.log(`x: ${x} y:${y}`);
-        // TODO send the data to the logic side
+        //const s= startGame();
+        event.target.innerText = playerMove(x,y);
       } else{
        modalDialog.modal.style.display = "inline";
       }
@@ -198,7 +197,8 @@ const resetBoard = () => {
    for(let box of grid.boxes){
      box.innerText = ''
    }
+   
    setPlayersNameOnBoard('','')
-   // TODO reset the board on the logic side
+   startGame(x,y);
 
  })
