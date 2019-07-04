@@ -32,8 +32,6 @@ modalDialog.span.onclick = function() {
 modalDialog.submitBtn.addEventListener('click',function(){
   const firstPlayerName = document.getElementById('firstPlayerNameInput');
   const secondPlayerName = document.getElementById('secondPlayerNameInput');
-  //
-  setPlayersName(firstPlayerName,secondPlayerName)
   setPlayersNameOnBoard(firstPlayerName.value,secondPlayerName.value)
   modalDialog.modal.style.display = 'none';
 });
@@ -41,9 +39,14 @@ modalDialog.submitBtn.addEventListener('click',function(){
 function setPlayersNameOnBoard(firstPlayerName,secondPlayerName){
   document.getElementById('first-player').innerText = firstPlayerName;
   document.getElementById('second-player').innerText = secondPlayerName;
-  return{user1,user2}
+  
 }
 
+function playersNamesAreSet(){
+  const player1 = document.getElementById('first-player').innerText;
+  const player2 = document.getElementById('second-player').innerText;
+  return  player1.trim().length  > 0 || player2.trim().length > 0;
+}
 
 const board = () =>{
   const gridBoard = document.getElementsByClassName('gridBoard')[0];
@@ -57,19 +60,25 @@ const grid = board();
 for(let box of grid.boxes){
 
    box.addEventListener('click',(event)=>{
+     if(playersNamesAreSet()){
+       const  x = event.target.getAttribute('data-x')
+       const  y = event.target.getAttribute('data-y')
+       event.target.innerText = "X"
+       console.log(`x: ${x} y:${y}`);
+       // TODO send the data to the logic side
+     } else{
+      modalDialog.modal.style.display = "inline";
+     }
 
-    const  x = event.target.getAttribute('data-x')
-    const  y = event.target.getAttribute('data-y')
-    event.target.innerText = "X"
-    console.log(`x: ${x} y:${y}`);
-    // TODO send the data to the logic side
-    
+
   })
-
 }
+
 grid.resetBtn.addEventListener('click',(event) => {
   for(let box of grid.boxes){
     box.innerText = ''
   }
+  setPlayersNameOnBoard('','')
   // TODO reset the board on the logic side
+
 })

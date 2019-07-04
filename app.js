@@ -11,7 +11,6 @@ const gameBoard = ( ()=>{
        board[row][column] = mark;
     }
 
-
     const isFull = () => {
         const a = board.filter(a => a === "_");
         if (a.length === 0) {
@@ -45,9 +44,10 @@ const playerFactory = (name, mark) => {
 }
 
 })();
+
 const startGame = () => {
     getPlayersNames();
-    
+
 
 };
 
@@ -56,7 +56,7 @@ const startGame = () => {
 
 const addmark = (mark,x,y,turn) => {
     let box= document.get;
-    
+
     box.textContent=mark;
     turn=turnCheck(turn);
     return turn;
