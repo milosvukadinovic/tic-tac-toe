@@ -1,4 +1,3 @@
-
 const gameBoard = ( ()=>{
 
     let currentBoard = document.querySelectorAll('.box');
@@ -13,7 +12,7 @@ const gameBoard = ( ()=>{
 
 
     const isFull = () => {
-        const a = board.filter(a => a === "_");
+        const a = board.filter(a => a === "");
         if (a.length === 0) {
           return true;
         }
@@ -29,53 +28,74 @@ const playerFactory = (name, mark) => {
     return{name,mark};
   };
 
+  let players=[];
   checkWin = (mark)=>{
 
     for(var i = 0 ; i < 3 ; i++){
-        if(Board[i][0] == mark && Board[i][1] == mark && Board[i][2] == mark){return true;}
+        if(board[i][0] == mark && board[i][1] == mark && board[i][2] == mark){return true;}
     }
 
    for(var i = 0 ; i < 3 ; i++){
-        if(Board[0][i] == mark && Board[1][i] == mark && Board[2][i] == mark){  return true;}
+        if(board[0][i] == mark && board[1][i] == mark && board[2][i] == mark){  return true;}
     }
 
-   if(Board[0][0] == mark && Board[1][1] == mark && Board[2][2] == mark){ return true;}
-   if(Board[0][2] == mark && Board[1][1] == mark && Board[2][0] == mark){return true;}
+   if(board[0][0] == mark && board[1][1] == mark && board[2][2] == mark){ return true;}
+   if(board[0][2] == mark && board[1][1] == mark && board[2][0] == mark){return true;}
     return false;
 }
 
 })();
-const startGame = () => {
-    getPlayersNames();
+
+
+
+const startGame = (name1,name2) => {
+    let turn=1;
+    setPlayersNames(name1,name2);
+    // do we need this function?
+    const playerMove = (x,y) => {
+        mark = turn===1 ? "X": "O" ;
+        addMark(mark,x,y);
+        checkWin(mark);
+        isFull();
+        turnCheck(turn)
+    };
+
+    const addMark = (mark,x,y) => {
     
-
-};
-
-
-
-
-const addmark = (mark,x,y,turn) => {
-    let box= document.get;
+        board[x][y].mark=mark;
+        board[x][y].checked=true;
     
-    box.textContent=mark;
-    turn=turnCheck(turn);
-    return turn;
+    };
+    
+    const turnCheck =(turn) => {
+    
+        turn = turn===1 ? 2 : 1 ;
+        return turn;
+    };
+    
+    
+    const setPlayersNames= (name1,name2) => {
+    
+      let player1 = playerFactory(name1,'X');
+      let player2 = playerFactory(name2,'O');
+        players.push(player1);
+        players.push(player2);
+      return {name1,name2};
+    };
+
+
 };
 
-const turnCheck =(turn) => {
-
-    turn = turn===1 ? 2 : 1 ;
-    return turn;
-};
 
 
-const getPlayersNames= () => {
 
-  let name1 = document.getElementById('firstPlayerNameInput');
-  let name2 = document.getElementById('secondPlayerNameInput');
-  return {name1,name2};
-};
 
+const resetBoard = () => {
+    let board = [ [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
+                  [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
+                {mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
+    return board;
+            };
 
 /*
   init game (); gets first player name second player name
