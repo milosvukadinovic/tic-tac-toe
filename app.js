@@ -1,23 +1,19 @@
-const GameBoard = ( ()=>{
 
-    let CurrentBoard = document.querySelectorAll('.Box');
+const gameBoard = ( ()=>{
 
-    let Board = [["","",""],
-                 ["","",""],
-                 ["","",""]];
+    let currentBoard = document.querySelectorAll('.box');
 
+    let board = [ [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
+                  [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
+                {mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
 
-    let board = [ [{mark:"",checked:false} , box:{mark:"",checked:false},{mark:"",checked:false}],
-                  [{mark:"",checked:false} , box:{mark:"",checked:false},box:{mark:"",checked:false}],
-                {mark:"",checked:false} , box:{mark:"",checked:false},box:{mark:"",checked:false}] ]
-
-    function ChangeBoard(row,column,mark){
-       Board[row][column] = mark;
+    function changeBoard(row,column,mark){
+       board[row][column] = mark;
     }
 
 
     const isFull = () => {
-        const a = Board.filter(a => a === "_");
+        const a = board.filter(a => a === "_");
         if (a.length === 0) {
           return true;
         }
@@ -33,7 +29,7 @@ const playerFactory = (name, mark) => {
     return{name,mark};
   };
 
-  CheckWin = (mark)=>{
+  checkWin = (mark)=>{
 
     for(var i = 0 ; i < 3 ; i++){
         if(Board[i][0] == mark && Board[i][1] == mark && Board[i][2] == mark){return true;}
@@ -48,67 +44,38 @@ const playerFactory = (name, mark) => {
     return false;
 }
 
-//Add Marker to Boxs
-CurrentBoard.forEach((Box)=>{
-  Box.addEventListener('click',()=>{
-      let nth_child = Box.getAttribute('data-number');
-      if(Player1.Chance === "0" && Box.innerHTML === "<h1> </h1>"){
-          var row  = Math.floor(Number(nth_child/3));
-          var column = nth_child%3;
-          ChangeBoard(row,column,0);
-            Box.innerHTML = '<h1>o</h1';
-          Player1.Chance = "1";
-          Player2.Chance = "0";
-          Total_Boxes_Got_Filled += 1;
-          if(Total_Boxes_Got_Filled > 4){
-              if(CheckWin("0")){
-                  console.log("Player1 Won");
-                  Total_Boxes_Got_Filled = 0;
-                  info_about_user.innerHTML = '<p>'+firstPlayerName.value+' Won...</p>';
-                  ResetAll();
-                  return true;
-              }
-          }
-          info_about_user.innerHTML = '<p>'+secondPlayerName.value+' playing...</p>';
-      }
-      else if(Player2.Chance === "0" && Box.innerHTML === "<h1> </h1>"){
-          var row  = Math.floor(Number(nth_child/3));
-          var column = nth_child%3;
-          ChangeBoard(row,column,1);
-          Box.innerHTML = '<h1>x</h1';
-          Player1.Chance = "0";
-          Player2.Chance = "1";
-
-          Total_Boxes_Got_Filled += 1;
-          if(Total_Boxes_Got_Filled > 4){
-              if(CheckWin("1")){
-                  Total_Boxes_Got_Filled = 0;
-                  info_about_user.innerHTML = '<p>'+secondPlayerName.value+' Won...</p>';
-                  ResetAll();
-                  return true;
-              }
-          }
-          info_about_user.innerHTML = '<p>'+firstPlayerName.value+' playing...</p>';
-      }
-      if(Total_Boxes_Got_Filled == 9){
-          Total_Boxes_Got_Filled = 0;
-          info_about_user.innerHTML = '<p>Draw...</p>';
-          ResetAll();
-          return true;
-      }
-  });
 })();
-const startGame = function() => {
-    getPlayersNames()
+const startGame = () => {
+    getPlayersNames();
+    
 
-}
-const getPlayersNames = function() => {
+};
 
-  let name1 = document.get
-  let name2 = document.get
 
-  return {name1,name}
-}
+
+
+const addmark = (mark,x,y,turn) => {
+    let box= document.get;
+    
+    box.textContent=mark;
+    turn=turnCheck(turn);
+    return turn;
+};
+
+const turnCheck =(turn) => {
+
+    turn = turn===1 ? 2 : 1 ;
+    return turn;
+};
+
+
+const getPlayersNames= () => {
+
+  let name1 = document.getElementById('firstPlayerNameInput');
+  let name2 = document.getElementById('secondPlayerNameInput');
+  return {name1,name2};
+};
+
 
 /*
   init game (); gets first player name second player name
