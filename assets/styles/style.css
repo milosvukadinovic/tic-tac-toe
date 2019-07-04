@@ -35,6 +35,7 @@ nav {
 	margin: 0 auto;
   border-radius: 10px;
 	display: grid;
+  grid-gap: 2px;
 	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 	box-sizing:border-box;
 }
@@ -61,6 +62,8 @@ transition-property: transform;
  .box:hover, .hvr-grow:focus, .hvr-grow:active {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+  background-color: #f5f5f5;
+  border: 1px solid #2c3e50;
 }
 .box:active{
 	-webkit-transform: scale(0.9);
@@ -69,17 +72,15 @@ transition-property: transform;
 h1  {
 	padding: 0;
 }
-h1.text {
-  padding: 0;
-  margin: auto auto;
- width: 80%;
-}
+
 .text{
   font-size: 3rem;
   font-family: 'Sniglet';
 	text-align: center;
 	user-select: none;
   text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 116px;
 }
 .right-vertical {
 	border-right: solid 1.5px #2c3e50;
@@ -139,4 +140,44 @@ border-left: solid 1.5px #2c3e50;
   text-decoration: none;
   cursor: pointer;
 }
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: none;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.button:hover{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.button:active {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
 /* End Modal */
+
+.menu ul {
+
+  list-style-type: none;
+  padding: 0;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+   width: 24%;
+}
+.menu ul li {
+  display: inline;
+  margin: auto;
+}

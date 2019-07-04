@@ -38,13 +38,31 @@ modalDialog.submitBtn.addEventListener('click',function(){
   setPlayersNameOnBoard(firstPlayerName.value,secondPlayerName.value)
   modalDialog.modal.style.display = 'none';
 });
+
 const board = () =>{
   const gridBoard = document.getElementsByClassName('gridBoard')[0];
   const boxes = document.getElementsByClassName('box');
-  return {gridBoard,boxes}
+  const resetBtn = document.getElementById('resetGameBtn');
+  return {gridBoard,boxes,resetBtn}
 }
+
 const grid = board();
 
-grid.boxes.forEach((box) =>{
-  
+for(let box of grid.boxes){
+
+   box.addEventListener('click',(event)=>{
+
+    const  x = event.target.getAttribute('data-x')
+    const  y = event.target.getAttribute('data-y')
+    event.target.innerText = "L"
+    console.log(`x: ${x} y:${y}`);
+    // TODO send the data to the logic side
+  })
+
+}
+grid.resetBtn.addEventListener('click',(event) => {
+  for(let box of grid.boxes){
+    box.innerText = ''
+  }
+  // TODO reset the board on the logic side
 })
