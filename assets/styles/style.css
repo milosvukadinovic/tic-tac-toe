@@ -9,10 +9,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@import url('https://fonts.googleapis.com/css?family=Sniglet&display=swap');
+
 
 body {
 	padding: 0;
 	margin: 0;
+
 }
 
 nav {
@@ -52,6 +55,7 @@ transition-duration: 0.3s;
 -webkit-transition-property: transform;
 transition-property: transform;
 
+
 }
 
  .box:hover, .hvr-grow:focus, .hvr-grow:active {
@@ -62,14 +66,20 @@ transition-property: transform;
 	-webkit-transform: scale(0.9);
    transform: scale(0.9);
 }
-h1 {
+h1  {
 	padding: 0;
 }
+h1.text {
+  padding: 0;
+  margin: auto auto;
+ width: 80%;
+}
 .text{
-	font-size: 2.5rem;
-	font-family: cursive;
+  font-size: 3rem;
+  font-family: 'Sniglet';
 	text-align: center;
 	user-select: none;
+  text-transform: uppercase;
 }
 .right-vertical {
 	border-right: solid 1.5px #2c3e50;
@@ -83,3 +93,50 @@ border-left: solid 1.5px #2c3e50;
 .bottom-horizontal {
 	border-bottom: solid 1.5px #2c3e50;
 }
+.first-player{
+  position: absolute;
+  left: 32px;
+  top: 15%;
+}
+.second-player {
+  position: absolute;
+  right: 32px;
+  top: 15%;
+}
+
+
+
+/* The New Game  Modal  */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* End Modal */

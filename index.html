@@ -2,25 +2,49 @@
 <html>
 <head>
   <title>Tic Tac Toe</title>
+  <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
-  <nav> Tic Tac Toe </nav>
-
+  <nav> <span>Tic Tac Toe </span>  </nav>
 
   <div class="grid-board">
-    <div class="box" data-number="0"><h1 class="text">x</h1></div>
-    <div class="box" data-number="1"><h1 class="text">o</h1></div>
-    <div class="box" data-number="2"><h1 class="text">x</h1></div>
-    <div class="box" data-number="3"><h1 class="text">o</h1></div>
-    <div class="box" data-number="4"><h1 class="text">x</h1></div>
-    <div class="box" data-number="5"><h1 class="text">o</h1></div>
-    <div class="box" data-number="6"><h1 class="text">x</h1></div>
-    <div class="box" data-number="7"><h1 class="text">o</h1></div>
-    <div class="box" data-number="8"><h1 class="text">x</h1></div>
+    <div class="box" data-number="0"><div class="text">x</div></div>
+    <div class="box" data-number="1"><div class="text">o</div></div>
+    <div class="box" data-number="2"><div class="text">x</div></div>
+    <div class="box" data-number="3"><div class="text">o</div></div>
+    <div class="box" data-number="4"><div class="text">x</div></div>
+    <div class="box" data-number="5"><div class="text">o</div></div>
+    <div class="box" data-number="6"><div class="text">x</div></div>
+    <div class="box" data-number="7"><div class="text">o</div></div>
+    <div class="box" data-number="8"><div class="text">x</div></div>
+
+
  </div>
+ <!-- first player -->
+<div class="first-player">
+  <h2> first player name </h2>
+</div>
 
 
+ <!-- second player -->
+ <div class="second-player">
+  <h2> second player name </h2>
+ </div>
+ <div class="menu">
+   <ul> <li> <button id="newGameBtn">New Game</button> </li> </ul>
+  </div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+
+  </div>
   <script src="app.js"></script>
+  <script src="dom.js" charset="utf-8"></script>
 </body>
 </html>
