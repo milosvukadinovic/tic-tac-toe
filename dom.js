@@ -13,9 +13,10 @@ const modalDialog = initModal();
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = (event) => {
   if (event.target == modalDialog) {
-    modal.style.display = "none";
+    modalDialog.modal.style.display = "none";
   }
 };
+
 // When the user clicks the button, open the modal
 modalDialog.newGameBtn.onclick = () => {
   modalDialog.modal.style.display = "inline";
@@ -26,18 +27,23 @@ modalDialog.span.onclick = function() {
   modalDialog.modal.style.display = "none";
 }
 
-function setPlayersNameOnBoard(firstPlayerName,secondPlayerName){
-  document.getElementById('first-player').innerText = firstPlayerName;
-  document.getElementById('second-player').innerText = secondPlayerName;
-}
+
 
 modalDialog.submitBtn.addEventListener('click',function(){
   const firstPlayerName = document.getElementById('firstPlayerNameInput');
   const secondPlayerName = document.getElementById('secondPlayerNameInput');
-
+  //
+  setPlayersName(firstPlayerName,secondPlayerName)
   setPlayersNameOnBoard(firstPlayerName.value,secondPlayerName.value)
   modalDialog.modal.style.display = 'none';
 });
+
+function setPlayersNameOnBoard(firstPlayerName,secondPlayerName){
+  document.getElementById('first-player').innerText = firstPlayerName;
+  document.getElementById('second-player').innerText = secondPlayerName;
+  return{user1,user2}
+}
+
 
 const board = () =>{
   const gridBoard = document.getElementsByClassName('gridBoard')[0];
@@ -54,9 +60,10 @@ for(let box of grid.boxes){
 
     const  x = event.target.getAttribute('data-x')
     const  y = event.target.getAttribute('data-y')
-    event.target.innerText = "L"
+    event.target.innerText = "X"
     console.log(`x: ${x} y:${y}`);
     // TODO send the data to the logic side
+    
   })
 
 }
