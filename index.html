@@ -9,28 +9,28 @@
   <nav> <span>Tic Tac Toe </span>  </nav>
 
   <div class="grid-board">
-    <div class="box" data-number="0"><div class="text">x</div></div>
-    <div class="box" data-number="1"><div class="text">o</div></div>
-    <div class="box" data-number="2"><div class="text">x</div></div>
-    <div class="box" data-number="3"><div class="text">o</div></div>
-    <div class="box" data-number="4"><div class="text">x</div></div>
-    <div class="box" data-number="5"><div class="text">o</div></div>
-    <div class="box" data-number="6"><div class="text">x</div></div>
-    <div class="box" data-number="7"><div class="text">o</div></div>
-    <div class="box" data-number="8"><div class="text">x</div></div>
-
+    <div class="box" data-x="0" data-y="0" checked="false"><div class="text">x</div></div>
+    <div class="box" data-x="0" data-y="1" checked="false"><div class="text">o</div></div>
+    <div class="box" data-x="0" data-y="2" checked="false"><div class="text">x</div></div>
+    <div class="box" data-x="1" data-y="0" checked="false"><div class="text">o</div></div>
+    <div class="box" data-x="1" data-y="1" checked="false"><div class="text">x</div></div>
+    <div class="box" data-x="1" data-y="2" checked="false"><div class="text">o</div></div>
+    <div class="box" data-x="2" data-y="0" checked="false"><div class="text">x</div></div>
+    <div class="box" data-x="2" data-y="1" checked="false"><div class="text">o</div></div>
+    <div class="box" data-x="2" data-y="2" checked="false"><div class="text">x</div></div>
 
  </div>
  <!-- first player -->
 <div class="first-player">
-  <h2> first player name </h2>
+  <h2 id="first-player"> first player name </h2>
 </div>
 
 
  <!-- second player -->
  <div class="second-player">
-  <h2> second player name </h2>
+  <h2 id="second-player"> second player name </h2>
  </div>
+
  <div class="menu">
    <ul> <li> <button id="newGameBtn">New Game</button> </li> </ul>
   </div>
@@ -40,7 +40,18 @@
 
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
+      <form>
+        <p>
+          <label> First Player Name: </label>
+          <input type="text" id="firstPlayerNameInput">
+        </p>
+        <p>
+          <label> Second Player Name: </label>
+          <input type="text" id="secondPlayerNameInput">
+        </p>
+
+      </form>
+      <button id="submitBtnPlayers"> Submit </button>
     </div>
 
   </div>
