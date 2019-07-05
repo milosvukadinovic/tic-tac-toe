@@ -49,16 +49,16 @@ const playerFactory = (name, mark) => {
 let turn=1;
 
 const startGame = (name1,name2) => {
-    
+
     setPlayersNames(name1,name2);
     // do we need this function?
-    
+
 
 
 };
 
 const playerMove = (x,y) => {
-    mark = turn===1 ? "X": "O" ;
+    mark = turn == 1 ? "X": "O" ;
     addMark(mark,x,y);
     checkWin(mark);
     isFull();
@@ -181,7 +181,7 @@ const resetBoard = () => {
       if(playersNamesAreSet()){
         const  x = event.target.getAttribute('data-x');
         const  y = event.target.getAttribute('data-y');
-        
+
         console.log(`x: ${x} y:${y}`);
         //const s= startGame();
         event.target.innerText = playerMove(x,y);
@@ -197,7 +197,7 @@ const resetBoard = () => {
    for(let box of grid.boxes){
      box.innerText = ''
    }
-   
+
    setPlayersNameOnBoard('','')
    startGame(x,y);
 
