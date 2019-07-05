@@ -1,7 +1,7 @@
 const gameBoard = ( ()=>{
 
     let currentBoard = document.querySelectorAll('.box');
-
+    let turn=1;
     let board = [ [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
                   [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}],
                 [{mark:"",checked:false} , {mark:"",checked:false},{mark:"",checked:false}]];
@@ -11,8 +11,17 @@ const gameBoard = ( ()=>{
     }
 
     const isFull = () => {
-        const a = board.filter(a => a === "");
-        if (a.length === 0) {
+      let len=0;
+      for (var i = 0; i < board.length; i++) {
+        for(var j=0;j<board[i].length;j++){
+            if (board[i][j].checked == false){
+              len++;
+            }
+        }
+
+    }
+
+        if (len == 0) {
           return true;
         }
         return false;
@@ -31,52 +40,66 @@ const playerFactory = (name, mark) => {
   checkWin = (mark)=>{
 
     for(var i = 0 ; i < 3 ; i++){
-        if(board[i][0] == mark && board[i][1] == mark && board[i][2] == mark){return true;}
+        if(board[i][0].mark == mark && board[i][1].mark == mark && board[i][2].mark == mark){return true;}
     }
 
    for(var i = 0 ; i < 3 ; i++){
-        if(board[0][i] == mark && board[1][i] == mark && board[2][i] == mark){  return true;}
+        if(board[0][i].mark == mark && board[1][i].mark == mark && board[2][i].mark == mark){  return true;}
     }
 
-   if(board[0][0] == mark && board[1][1] == mark && board[2][2] == mark){ return true;}
-   if(board[0][2] == mark && board[1][1] == mark && board[2][0] == mark){return true;}
+   if(board[0][0].mark == mark && board[1][1].mark == mark && board[2][2].mark == mark){ return true;}
+   if(board[0][2].mark == mark && board[1][1].mark == mark && board[2][0].mark == mark){return true;}
     return false;
 }
 
-})();
 
 
-let turn=1;
+
+
 
 const startGame = (name1,name2) => {
 
     setPlayersNames(name1,name2);
-    // do we need this function?
+    const b = gameBoard();
 
 
 
 };
-
+ // here we need to add poppups, but also return mark. If we don't return mark it
+ // will be incomplete. Maybe we can return two values, one mark and
+ // other 1,2,3(1-game pending, 2- show winner , 3- draw ,
+ // 4- press a button thats not already taken?)
 const playerMove = (x,y) => {
-    mark = turn == 1 ? "X": "O" ;
-    addMark(mark,x,y);
-    checkWin(mark);
-    isFull();
-    turnCheck(turn)
-    return mark;
+    mark = turn===1 ? "X": "O" ;
+    if (addMark(mark,x,y)){
+        // add pop up here, can't click same button twice
+        return [mark,1];
+    }
+    if(checkWin(mark)){
+        // add pop up here, its a win
+        return [mark,2];
+    }
+    if(isFull()){
+        // add pop up here, its a draw
+        return [mark,3];
+    }
+    turnCheck()
+    return [mark,0];
 };
 
 const addMark = (mark,x,y) => {
-
+    if (board[x][y].checked==true){
+        return true
+}
     board[x][y].mark=mark;
     board[x][y].checked=true;
+    return false
 
 };
 
-const turnCheck =(turn) => {
+const turnCheck =() => {
 
     turn = turn===1 ? 2 : 1 ;
-    return turn;
 };
 
 
@@ -166,14 +189,14 @@ const resetBoard = () => {
    return  player1.trim().length  > 0 || player2.trim().length > 0;
  }
 
- const board = () =>{
+ const boardf = () =>{
    const gridBoard = document.getElementsByClassName('gridBoard')[0];
    const boxes = document.getElementsByClassName('box');
    const resetBtn = document.getElementById('resetGameBtn');
    return {gridBoard,boxes,resetBtn}
  }
 
- const grid = board();
+ const grid = boardf();
 
  for(let box of grid.boxes){
 
@@ -183,8 +206,28 @@ const resetBoard = () => {
         const  y = event.target.getAttribute('data-y');
 
         console.log(`x: ${x} y:${y}`);
-        //const s= startGame();
-        event.target.innerText = playerMove(x,y);
+        symbol=playerMove(x,y);
+
+        switch (symbol[1]) {
+        case 1: // error picked used button
+          console.log("Wrong button, press again") //pop up
+          break;
+        case 2: // winning condition
+          console.log("win")
+          event.target.innerText = symbol[0]; // pop up message
+          break;
+        case 3: // draw condition
+          console.log("draw")
+          event.target.innerText = symbol[0]; //pop up
+          break;
+        default: // 0 will be everything is fine and continue on
+          event.target.innerText = symbol[0];
+        }
+
+        if (symbol[1] == '1' || symbol == 'O'){
+
+        }
+
       } else{
        modalDialog.modal.style.display = "inline";
       }
@@ -202,3 +245,4 @@ const resetBoard = () => {
    startGame(x,y);
 
  })
+})();
