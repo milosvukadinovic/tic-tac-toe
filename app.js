@@ -73,18 +73,18 @@ const playerMove = (x,y) => {
     mark = turn===1 ? "X": "O" ;
     if (addMark(mark,x,y)){
         // add pop up here, can't click same button twice
-        return;
+        return [mark,1];
     }
     if(checkWin(mark)){
         // add pop up here, its a win
-        return mark;
+        return [mark,2];
     }
     if(isFull()){
         // add pop up here, its a draw
-        return;
+        return [mark,3];
     }
     turnCheck()
-    return mark;
+    return [mark,0];
 };
 
 const addMark = (mark,x,y) => {
@@ -207,8 +207,25 @@ const resetBoard = () => {
         
         console.log(`x: ${x} y:${y}`);
         symbol=playerMove(x,y);
-        if (symbol == 'X' || symbol == 'O'){
-            event.target.innerText = symbol;
+
+        switch (symbol[1]) {
+        case 1: // error picked used button
+          console.log("Wrong button, press again") //pop up
+          break;
+        case 2: // winning condition
+          console.log("win")
+          event.target.innerText = symbol[0]; // pop up message
+          break;
+        case 3: // draw condition
+          console.log("draw")  
+          event.target.innerText = symbol[0]; //pop up
+          break;
+        default: // 0 will be everything is fine and continue on
+          event.target.innerText = symbol[0];
+        }
+
+        if (symbol[1] == '1' || symbol == 'O'){
+            
         }
         
       } else{
