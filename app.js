@@ -70,14 +70,18 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
               event.target.innerText = getCurrentPlayer().getMark();
 
             if(board.checkForWinner(getCurrentPlayer().getMark())){
+              freezeButtons();
               setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},500);
+              
             }else{
               getCurrentPlayer().getMark() == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
             }
 
             if(board.checkIfFull()){
+              freezeButtons();
                 setTimeout( function(){alert("It's a draw, please reset the game")},500);
-            }
+                
+              }
 
         } else{
 
@@ -104,6 +108,12 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
 
    return{modal,closeBtnspan,submitBtn}
  }
+
+const freezeButtons = () =>{
+  for(let box of grid.boxes){
+    box.removeEventListener('click', listener);
+}
+}
 
  const domBoard = () =>{
    const gridBoard = document.getElementsByClassName('gridBoard')[0];
@@ -170,24 +180,26 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
 
  }
 
+function listener(){
+  
 
+    const  x = event.target.getAttribute('data-x');
+    const  y = event.target.getAttribute('data-y');
+
+    if(controlls.namesAreSet()){
+
+      controlls.playerMove(parseInt(x),parseInt(y),event);
+    }else{
+      alert("Please click new game button set your names to start a game")
+    }
+
+
+
+}
 
  for(let box of grid.boxes){
 
-    box.addEventListener('click',(event)=>{
-
-      const  x = event.target.getAttribute('data-x');
-      const  y = event.target.getAttribute('data-y');
-
-      if(controlls.namesAreSet()){
-
-        controlls.playerMove(parseInt(x),parseInt(y),event);
-      }else{
-        alert("Please click new game button set your names to start a game")
-      }
-
-
- })
+    box.addEventListener('click',listener)
 }
 
  grid.resetBtn.addEventListener('click',() => {
