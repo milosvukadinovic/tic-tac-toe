@@ -53,37 +53,35 @@ const playerFactory = (name, mark) => {
     const setName = (n) => { name = n;}
     return{ getName, getMark, setName };
   };
-const gameControlls = (board,domBoard,firstPlayer,secondPlayer) => {
+const gameControlls = (board,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
 
   const getCurrentPlayer = () => currentPlayer;
   const setCurrentPlayer = (p) => currentPlayer = p;
+  const getFirstPlayer = () => firstPlayer;
+  const getSecondPlayer = () => secondPlayer;
 
-  const playerMove = (i,j) => {
+  const playerMove = (i,j,event) => {
+
         const isMarkSet = board.setMark(getCurrentPlayer().getMark(),i,j)
 
+
         if(isMarkSet){
+              event.target.innerText = getCurrentPlayer().getMark();
+
             if(board.checkForWinner(getCurrentPlayer().getMark())){
-              alert(getCurrentPlayer().getName() +" is the winner hurray")
-
-              if(confirm("Do you want to reset the game")){
-                location.reload();
-              }
+              setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},500);
             }else{
-
               getCurrentPlayer().getMark() == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
             }
 
             if(board.checkIfFull()){
-              alert("It's a DRAW");
-
-              if(confirm("Do you want to reset the game")){
-                location.reload();
-              }
+                setTimeout( function(){alert("It's a draw, please reset the game")},500);
             }
 
         } else{
-          alert('That position is taken');
+
+          setTimeout( function() {alert('That position is taken')},500);
         }
 
   };
@@ -91,15 +89,10 @@ const gameControlls = (board,domBoard,firstPlayer,secondPlayer) => {
   const namesAreSet = () => {
     return firstPlayer.getName().length > 0 && secondPlayer.getName().length > 0;
   }
-  return{playerMove,firstPlayer,secondPlayer,getCurrentPlayer,namesAreSet};
+  return{playerMove,getFirstPlayer,getSecondPlayer,getCurrentPlayer,namesAreSet};
 }
 
-// Starting point of the game
-const game = gameBoard();
-const firstPlayer = playerFactory('','X');
-const secondPlayer = playerFactory('','O');
 
-const controlls = gameControlls(game,firstPlayer,secondPlayer);
 
 
  // DOM part
@@ -119,9 +112,20 @@ const controlls = gameControlls(game,firstPlayer,secondPlayer);
    return {gridBoard,boxes,resetBtn}
  }
 
+// Starting point of the game
  const grid = domBoard();
 
  const modalDialog = initModal();
+
+ const game = gameBoard();
+ const firstPlayer = playerFactory('','X');
+ const secondPlayer = playerFactory('','O');
+
+ const controlls = gameControlls(game,firstPlayer,secondPlayer);
+
+
+
+
 
 
  // When the user clicks anywhere outside of the modal, close it
@@ -150,8 +154,8 @@ const controlls = gameControlls(game,firstPlayer,secondPlayer);
    if(firstPlayerName.value.trim().length > 0 && secondPlayerName.value.trim().length > 0){
      setPlayersNameOnBoard(firstPlayerName.value.trim(),secondPlayerName.value.trim())
 
-     controlls.firstPlayer.setName(firstPlayerName.value.trim());
-     controlls.secondPlayer.setName(secondPlayerName.value.trim());
+     controlls.getFirstPlayer().setName(firstPlayerName.value.trim());
+     controlls.getSecondPlayer().setName(secondPlayerName.value.trim());
    }
 
    firstPlayerName.value = '';
@@ -176,8 +180,8 @@ const controlls = gameControlls(game,firstPlayer,secondPlayer);
       const  y = event.target.getAttribute('data-y');
 
       if(controlls.namesAreSet()){
-        event.target.innerText = controlls.getCurrentPlayer().getMark();
-        controlls.playerMove(parseInt(x),parseInt(y));
+
+        controlls.playerMove(parseInt(x),parseInt(y),event);
       }else{
         alert("Please click new game button set your names to start a game")
       }
