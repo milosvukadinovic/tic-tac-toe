@@ -1,57 +1,52 @@
 // this is the game board
 const gameBoard = () => {
 
-    const _board = [['','',''],['','',''],['','','']];
+    const _board = [0,1,2,3,4,5,6,7,8];
+    const winningCombos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [2, 4, 6],
+      [0, 4, 8]
+    ];
 
-    const setMark = (mark,i,j) => {
-      if(_board[i][j].length > 0){
-        return false;
-      }else{
-        _board[i][j] = mark;
-        return true;
-      }
-    }
-
-const checkIfFull = () => {
-          let isFull = true;
-          _board.forEach(row => {
-            row.forEach(cell => {
-                if(cell.length == 0){
-                  isFull = false;
-                }
-            })
-          })
-          return isFull;
-        }
-
+    const setMark = (mark,index) => {
+      if (typeof _board[index] === "number"){
+      _board[index] = mark;
+      return true;
+    }else{
+      return false;
+    }}
+  
+    const checkIfFull = () => _board.every(element => typeof element === "string");
+     
     const getBoard = () => _board;
 
-    const checkForWinner = (mark)=> {
-
-      // horizontal
-      if(_board[0][0] == mark && _board[0][1] == mark && _board[0][2] == mark){ return true; }
-      if(_board[1][0] == mark && _board[1][1] == mark && _board[1][2] == mark){ return true; }
-      if(_board[2][0] == mark && _board[2][1] == mark && _board[2][2] == mark){ return true; }
-
-      // vertical
-      if(_board[0][0] == mark && _board[1][0] == mark && _board[2][0] == mark){ return true; }
-      if(_board[0][1] == mark && _board[1][1] == mark && _board[2][1] == mark){ return true; }
-      if(_board[0][2] == mark && _board[1][2] == mark && _board[2][2] == mark){ return true; }
-
-      // diagonal
-      if(_board[0][0] == mark && _board[1][1] == mark && _board[2][2] == mark){ return true; }
-      if(_board[0][2] == mark && _board[1][1] == mark && _board[2][0] == mark){ return true; }
-
-      return false;
+    const checkForWinner = (mark,currentPlayer)=> {
+      return winningCombos.some(combo => combo.every(e => currentPlayer.moves.includes(e)));
     }
 
     return { getBoard, setMark, checkIfFull,checkForWinner };
 }
 const playerFactory = (name, mark) => {
+    const moves=[];
+    const play = (index,_board) => {
+      a=_board.setMark( this.mark,index);
+      if(a){
+        moves.push(index);
+        return a}
+        else{
+          return a
+        }
+      
+    };
     const getName = () => name;
     const getMark = () => mark;
     const setName = (n) => { name = n;}
-    return{ getName, getMark, setName };
+    return{ getName, getMark, setName , play, moves};
   };
 const gameControlls = (board,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
@@ -61,15 +56,13 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
   const getFirstPlayer = () => firstPlayer;
   const getSecondPlayer = () => secondPlayer;
 
-  const playerMove = (i,j,event) => {
-
-        const isMarkSet = board.setMark(getCurrentPlayer().getMark(),i,j)
-
-
+  const playerMove = (index,event) => {
+        //const isMarkSet = board.setMark(getCurrentPlayer().getMark(),index,currentPlayer)
+        const isMarkSet = getCurrentPlayer().play(index,board);
         if(isMarkSet){
               event.target.innerText = getCurrentPlayer().getMark();
 
-            if(board.checkForWinner(getCurrentPlayer().getMark())){
+            if(board.checkForWinner(getCurrentPlayer().getMark(),getCurrentPlayer())){
               freezeButtons();
               setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},500);
               
@@ -183,12 +176,11 @@ const freezeButtons = () =>{
 function listener(){
   
 
-    const  x = event.target.getAttribute('data-x');
-    const  y = event.target.getAttribute('data-y');
+    const  index = event.target.getAttribute('index');
 
     if(controlls.namesAreSet()){
 
-      controlls.playerMove(parseInt(x),parseInt(y),event);
+      controlls.playerMove(parseInt(index),event);
     }else{
       alert("Please click new game button set your names to start a game")
     }
