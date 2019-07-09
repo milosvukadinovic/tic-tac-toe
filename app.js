@@ -64,7 +64,7 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
 
             if(board.checkForWinner(getCurrentPlayer().getMark(),getCurrentPlayer())){
               freezeButtons();
-              setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},500);
+              setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},50);
               
             }else{
               getCurrentPlayer().getMark() == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
@@ -72,13 +72,13 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
 
             if(board.checkIfFull()){
               freezeButtons();
-                setTimeout( function(){alert("It's a draw, please reset the game")},500);
+                setTimeout( function(){alert("It's a draw, please reset the game")},50);
                 
               }
 
         } else{
 
-          setTimeout( function() {alert('That position is taken')},500);
+          setTimeout( function() {alert('That position is taken')},50);
         }
 
   };
