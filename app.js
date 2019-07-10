@@ -14,12 +14,12 @@ const gameBoard = () => {
     ];
 
     const setMark = (mark,index) => {
-      if (typeof _board[index] === "number"){
-      _board[index] = mark;
-      return true;
-    }else{
-      return false;
-    }}
+      if(typeof _board[index] === "number") {
+        _board[index] === mark;
+        return true
+       }
+       return false;
+      }
   
     const checkIfFull = () => _board.every(element => typeof element === "string");
      
@@ -43,10 +43,7 @@ const playerFactory = (name, mark) => {
         }
       
     };
-    const getName = () => name;
-    const getMark = () => mark;
-    const setName = (n) => { name = n;}
-    return{ getName, getMark, setName , play, moves};
+    return{ name, mark, play, moves};
   };
 const gameControlls = (board,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
@@ -57,17 +54,17 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
   const getSecondPlayer = () => secondPlayer;
 
   const playerMove = (index,event) => {
-        //const isMarkSet = board.setMark(getCurrentPlayer().getMark(),index,currentPlayer)
+        //const isMarkSet = board.setMark(getCurrentPlayer().mark,index,currentPlayer)
         const isMarkSet = getCurrentPlayer().play(index,board);
         if(isMarkSet){
-              event.target.innerText = getCurrentPlayer().getMark();
+              event.target.innerText = getCurrentPlayer().mark;
 
-            if(board.checkForWinner(getCurrentPlayer().getMark(),getCurrentPlayer())){
+            if(board.checkForWinner(getCurrentPlayer().mark,getCurrentPlayer())){
               freezeButtons();
-              setTimeout(function(){alert(getCurrentPlayer().getName() +" is the winner hurray")},50);
+              setTimeout(function(){alert(getCurrentPlayer().name +" is the winner hurray")},50);
               
             }else{
-              getCurrentPlayer().getMark() == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
+              getCurrentPlayer().mark == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
             }
 
             if(board.checkIfFull()){
@@ -84,7 +81,7 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
   };
 
   const namesAreSet = () => {
-    return firstPlayer.getName().length > 0 && secondPlayer.getName().length > 0;
+    return firstPlayer.name.length > 0 && secondPlayer.name.length > 0;
   }
   return{playerMove,getFirstPlayer,getSecondPlayer,getCurrentPlayer,namesAreSet};
 }
@@ -157,8 +154,8 @@ const freezeButtons = () =>{
    if(firstPlayerName.value.trim().length > 0 && secondPlayerName.value.trim().length > 0){
      setPlayersNameOnBoard(firstPlayerName.value.trim(),secondPlayerName.value.trim())
 
-     controlls.getFirstPlayer().setName(firstPlayerName.value.trim());
-     controlls.getSecondPlayer().setName(secondPlayerName.value.trim());
+     controlls.getFirstPlayer().name=firstPlayerName.value.trim();
+     controlls.getSecondPlayer().name=secondPlayerName.value.trim();
    }
 
    firstPlayerName.value = '';
