@@ -22,38 +22,30 @@ const gameBoard = () => {
        }
        return false;
       }
-  
-    const checkIfFull = () => {
-      console.log('shit here odnt work');
-      console.log(game.board[0]);
-      a=game.board.every(element => typeof element == 'string');
-      console.log(a);
-      return a;
-    }
-    const getBoard = () => game.board;
 
+    const getBoard = () => game.board;
     const checkForWinner = (mark,currentPlayer)=> {
       return winningCombos.some(combo => combo.every(e => currentPlayer.moves.includes(e)));
     }
 
-    return { getBoard, setMark, checkIfFull,checkForWinner, board };
+    return { getBoard, setMark,checkForWinner, board };
 }
 const playerFactory = (name, mark) => {
     const moves=[];
     const play = (index,board) => {
       a=game.setMark( this.mark,index);
-    
+
       if(a){
         moves.push(index);
         return a}
         else{
           return a
         }
-      
+
     };
     return{ name, mark, play, moves};
   };
-const gameControlls = (game,firstPlayer,secondPlayer) => {
+const gameControlls = (game,grid,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
 
   const getCurrentPlayer = () => currentPlayer;
@@ -70,15 +62,15 @@ const gameControlls = (game,firstPlayer,secondPlayer) => {
             if(game.checkForWinner(getCurrentPlayer().mark,getCurrentPlayer())){
               freezeButtons();
               setTimeout(function(){alert(getCurrentPlayer().name +" is the winner hurray")},50);
-              
+
             }else{
               getCurrentPlayer().mark == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
             }
-            
-            if(game.checkIfFull()){
+
+            if(grid.isFull()){
               freezeButtons();
                 setTimeout( function(){alert("It's a draw, please reset the game")},50);
-                
+
               }
 
         } else{
@@ -117,7 +109,19 @@ const freezeButtons = () =>{
    const gridBoard = document.getElementsByClassName('gridBoard')[0];
    const boxes = document.getElementsByClassName('box');
    const resetBtn = document.getElementById('resetGameBtn');
-   return {gridBoard,boxes,resetBtn}
+
+
+   const isFull = () => {
+      let full = true;
+      for(let box of boxes){
+            if(box.innerText.length == 0 ){
+                full = false;
+            }
+      }
+      return full;
+   }
+
+   return {gridBoard,boxes,resetBtn,isFull}
  }
 
 // Starting point of the game
@@ -129,7 +133,7 @@ const freezeButtons = () =>{
  const firstPlayer = playerFactory('','X');
  const secondPlayer = playerFactory('','O');
 
- const controlls = gameControlls(game,firstPlayer,secondPlayer);
+ const controlls = gameControlls(game,grid,firstPlayer,secondPlayer);
 
 
 
@@ -179,7 +183,7 @@ const freezeButtons = () =>{
  }
 
 function listener(){
-  
+
 
     const  index = event.target.getAttribute('index');
 
