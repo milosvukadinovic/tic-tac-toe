@@ -1,7 +1,7 @@
 // this is the game board
 const gameBoard = () => {
 
-    const _board = [0,1,2,3,4,5,6,7,8];
+    const board = [0,1,2,3,4,5,6,7,8];
     const winningCombos = [
       [0, 1, 2],
       [3, 4, 5],
@@ -14,27 +14,35 @@ const gameBoard = () => {
     ];
 
     const setMark = (mark,index) => {
-      if(typeof _board[index] === "number") {
-        _board[index] === mark;
-        return true
+      console.log('this here should work')
+      console.log(game.board[index]);
+      if(typeof game.board[index] == "number") {
+        game.board[index] = mark;
+        return true;
        }
        return false;
       }
   
-    const checkIfFull = () => _board.every(element => typeof element === "string");
-     
-    const getBoard = () => _board;
+    const checkIfFull = () => {
+      console.log('shit here odnt work');
+      console.log(game.board[0]);
+      a=game.board.every(element => typeof element == 'string');
+      console.log(a);
+      return a;
+    }
+    const getBoard = () => game.board;
 
     const checkForWinner = (mark,currentPlayer)=> {
       return winningCombos.some(combo => combo.every(e => currentPlayer.moves.includes(e)));
     }
 
-    return { getBoard, setMark, checkIfFull,checkForWinner };
+    return { getBoard, setMark, checkIfFull,checkForWinner, board };
 }
 const playerFactory = (name, mark) => {
     const moves=[];
-    const play = (index,_board) => {
-      a=_board.setMark( this.mark,index);
+    const play = (index,board) => {
+      a=game.setMark( this.mark,index);
+    
       if(a){
         moves.push(index);
         return a}
@@ -45,7 +53,7 @@ const playerFactory = (name, mark) => {
     };
     return{ name, mark, play, moves};
   };
-const gameControlls = (board,firstPlayer,secondPlayer) => {
+const gameControlls = (game,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
 
   const getCurrentPlayer = () => currentPlayer;
@@ -55,19 +63,19 @@ const gameControlls = (board,firstPlayer,secondPlayer) => {
 
   const playerMove = (index,event) => {
         //const isMarkSet = board.setMark(getCurrentPlayer().mark,index,currentPlayer)
-        const isMarkSet = getCurrentPlayer().play(index,board);
+        const isMarkSet = getCurrentPlayer().play(index,game.board);
         if(isMarkSet){
               event.target.innerText = getCurrentPlayer().mark;
 
-            if(board.checkForWinner(getCurrentPlayer().mark,getCurrentPlayer())){
+            if(game.checkForWinner(getCurrentPlayer().mark,getCurrentPlayer())){
               freezeButtons();
               setTimeout(function(){alert(getCurrentPlayer().name +" is the winner hurray")},50);
               
             }else{
               getCurrentPlayer().mark == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
             }
-
-            if(board.checkIfFull()){
+            
+            if(game.checkIfFull()){
               freezeButtons();
                 setTimeout( function(){alert("It's a draw, please reset the game")},50);
                 
