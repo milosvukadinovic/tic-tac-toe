@@ -14,8 +14,6 @@ const gameBoard = () => {
     ];
 
     const setMark = (mark,index) => {
-      console.log('this here should work')
-      console.log(game.board[index]);
       if(typeof game.board[index] == "number") {
         game.board[index] = mark;
         return true;
