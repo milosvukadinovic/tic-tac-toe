@@ -48,23 +48,20 @@ const playerFactory = (name, mark) => {
 const gameControlls = (game,grid,firstPlayer,secondPlayer) => {
   let currentPlayer = firstPlayer;
 
-  const getCurrentPlayer = () => currentPlayer;
-  const setCurrentPlayer = (p) => currentPlayer = p;
-  const getFirstPlayer = () => firstPlayer;
-  const getSecondPlayer = () => secondPlayer;
+  
 
   const playerMove = (index,event) => {
-        //const isMarkSet = board.setMark(getCurrentPlayer().mark,index,currentPlayer)
-        const isMarkSet = getCurrentPlayer().play(index,game.board);
+        //const isMarkSet = board.setMark(currentPlayer.mark,index,currentPlayer)
+        const isMarkSet = currentPlayer.play(index,game.board);
         if(isMarkSet){
-              event.target.innerText = getCurrentPlayer().mark;
+              event.target.innerText = currentPlayer.mark;
 
-            if(game.checkForWinner(getCurrentPlayer().mark,getCurrentPlayer())){
+            if(game.checkForWinner(currentPlayer.mark,currentPlayer)){
               freezeButtons();
-              setTimeout(function(){alert(getCurrentPlayer().name +" is the winner hurray")},50);
+              setTimeout(function(){alert(currentPlayer.name +" is the winner hurray")},50);
 
             }else{
-              getCurrentPlayer().mark == 'X' ? setCurrentPlayer(secondPlayer) : setCurrentPlayer(firstPlayer);
+              currentPlayer.mark == 'X' ? currentPlayer=secondPlayer : currentPlayer=firstPlayer;
             }
 
             if(grid.isFull()){
@@ -83,7 +80,7 @@ const gameControlls = (game,grid,firstPlayer,secondPlayer) => {
   const namesAreSet = () => {
     return firstPlayer.name.length > 0 && secondPlayer.name.length > 0;
   }
-  return{playerMove,getFirstPlayer,getSecondPlayer,getCurrentPlayer,namesAreSet};
+  return{playerMove,firstPlayer,secondPlayer,currentPlayer,namesAreSet};
 }
 
 
@@ -166,8 +163,8 @@ const freezeButtons = () =>{
    if(firstPlayerName.value.trim().length > 0 && secondPlayerName.value.trim().length > 0){
      setPlayersNameOnBoard(firstPlayerName.value.trim(),secondPlayerName.value.trim())
 
-     controlls.getFirstPlayer().name=firstPlayerName.value.trim();
-     controlls.getSecondPlayer().name=secondPlayerName.value.trim();
+     controlls.firstPlayer.name=firstPlayerName.value.trim();
+     controlls.secondPlayer.name=secondPlayerName.value.trim();
    }
 
    firstPlayerName.value = '';
