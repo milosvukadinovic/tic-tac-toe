@@ -2,25 +2,60 @@
 <html>
 <head>
   <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Sniglet&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
-  <h1>Tic Tac Toe</h1>
+  <nav> <span>Tic Tac Toe </span>  </nav>
+  <div class="grid-board">
+    <div class="box text" index="0" checked="false"></div>
+    <div class="box text" index="1" checked="false"></div>
+    <div class="box text" index="2" checked="false"></div>
+    <div class="box text" index="3" checked="false"></div>
+    <div class="box text" index="4" checked="false"></div>
+    <div class="box text" index="5" checked="false"></div>
+    <div class="box text" index="6" checked="false"></div>
+    <div class="box text" index="7" checked="false"></div>
+    <div class="box text" index="8" checked="false"></div>
 
-  <div id="winner"></div>
+ </div>
+ <!-- first player -->
+<div class="first-player">
+  <h2 id="first-player"></h2>
+</div>
 
-  <div class="Grid">
-    <div class="Pos Pos1" data-number="0"><h1> </h1></div>
-    <div class="Pos Pos2" data-number="1"><h1> </h1></div>
-    <div class="Pos Pos3" data-number="2"><h1> </h1></div>
-    <div class="Pos Pos4" data-number="3"><h1> </h1></div>
-    <div class="Pos Pos5" data-number="4"><h1> </h1></div>
-    <div class="Pos Pos6" data-number="5"><h1> </h1></div>
-    <div class="Pos Pos7" data-number="6"><h1> </h1></div>
-    <div class="Pos Pos8" data-number="7"><h1> </h1></div>
-    <div class="Pos Pos9" data-number="8"><h1> </h1></div>
+
+ <!-- second player -->
+ <div class="second-player">
+  <h2 id="second-player"></h2>
  </div>
 
-  <script src="logic.js"></script>
+ <div class="menu">
+   <ul> <li> <button class="button" id="newGameBtn">New Game</button> </li>
+       <li> <button class="button" id="resetGameBtn"> Reset Game</button>
+  </ul>
+  </div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form>
+        <p>
+          <label> First Player Name: </label>
+          <input type="text" id="firstPlayerNameInput"> X
+        </p>
+        <p>
+          <label> Second Player Name: </label>
+          <input type="text" id="secondPlayerNameInput"> O
+        </p>
+
+      </form>
+      <button id="submitBtnPlayers"> Submit </button>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>

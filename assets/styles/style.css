@@ -1,0 +1,181 @@
+@font-face {
+  font-family: 'RoadsideRegular';
+  src: url('../fonts/RoadsideRegular.eot');
+  src: url('../fonts/RoadsideRegular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/RoadsideRegular.svg#RoadsideRegular') format('svg'),
+       url('../fonts/RoadsideRegular.ttf') format('truetype'),
+			 url('../fonts/RoadsideRegular.woff') format('woff'),
+       url('../fonts/RoadsideRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Sniglet&display=swap');
+
+
+body {
+	padding: 0;
+	margin: 0;
+
+}
+
+nav {
+	height: 80px;
+	margin-bottom: 24px;
+	background-color: #2c82c9;
+	color: white;
+	font-size: 3.5rem;
+	text-align: center;
+	font-family: 'RoadsideRegular';
+	user-select: none;
+}
+
+.grid-board {
+	width: 350px;
+	height: 350px;
+	margin: 0 auto;
+  border-radius: 10px;
+	display: grid;
+	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+	box-sizing:border-box;
+}
+
+.box {
+  border: 3px solid #2c3e50;
+  border-radius: 2px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+	vertical-align: middle;
+	box-sizing:border-box;
+-webkit-transform: perspective(1px) translateZ(0);
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+-webkit-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-transition-property: transform;
+transition-property: transform;
+
+
+}
+
+ .box:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  background-color: #f5f5f5;
+}
+.box:active{
+	-webkit-transform: scale(0.9);
+   transform: scale(0.9);
+}
+h1  {
+	padding: 0;
+}
+
+.text{
+  font-size: 3rem;
+  font-family: 'Sniglet';
+	text-align: center;
+	user-select: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 110px;
+}
+.right-vertical {
+	border-right: solid 1.5px #2c3e50;
+}
+.left-vertical {
+border-left: solid 1.5px #2c3e50;
+}
+.top-horizontal {
+	border-top: solid 1.5px #2c3e50;
+}
+.bottom-horizontal {
+	border-bottom: solid 1.5px #2c3e50;
+}
+.first-player{
+  position: absolute;
+  left: 32px;
+  top: 15%;
+}
+.second-player {
+  position: absolute;
+  right: 32px;
+  top: 15%;
+}
+
+
+
+/* The New Game  Modal  */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: none;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.button:hover{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.button:active {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+/* End Modal */
+
+.menu ul {
+
+  list-style-type: none;
+  padding: 0;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+   width: 24%;
+}
+.menu ul li {
+  display: inline;
+  margin: auto;
+}
