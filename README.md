@@ -6,10 +6,9 @@
 * Box will show the move you made and will await the next player's turn.
 * Continue playing untill someone wins or results in a draw. Good luck!
 
-### Soon to be implemented:
-* Versus computer, two difficulties
+ ## Acknowledgments
 
-  
+* [The Odin Project - TicTacToe](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript) 
 
 #### Contributors:
 * [@azdrenymeri](https://github.com/azdrenymeri) 
