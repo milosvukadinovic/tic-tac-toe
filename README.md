@@ -1,5 +1,7 @@
 # Welcome to a two-player game TicTacToe!
 
+![Alt text](/assets/styles/ss.jpg)
+
 ### How to play:
 * Open index.html in your browser
 * After writing down names for both players, the first player is asked to make his move
